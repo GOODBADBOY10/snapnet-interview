@@ -1,14 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useEventsData } from "../api/eventsApi";
 import type { Event } from "../api/eventsApi";
+import { ArrowLeftIcon } from "lucide-react";
 
 
 export default function EventDetailPage() {
-  // `useParams` needs a generic type so `id` is recognized as a string
   const { id } = useParams<{ id: string }>();
   const { data: events = [] } = useEventsData();
 
-  // Explicitly type `e` to avoid the "implicitly has an any type" error
   const event = events.find((e: Event) => String(e.id) === id);
 
   if (!event) {
@@ -23,7 +22,7 @@ export default function EventDetailPage() {
 
       {event.petsAllowed && (
         <p className="mt-3 text-green-600 font-medium flex items-center gap-2">
-          🐾 Pets Allowed
+          Pets Allowed
         </p>
       )}
 
@@ -31,7 +30,7 @@ export default function EventDetailPage() {
         to="/"
         className="inline-block mt-6 text-blue-600 hover:underline font-medium"
       >
-        ← Back to events
+        <ArrowLeftIcon /> Back to events
       </Link>
     </div>
   );

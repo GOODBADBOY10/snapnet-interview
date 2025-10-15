@@ -6,14 +6,12 @@ import type { Event } from "../api/eventsApi";
 
 const ITEMS_PER_PAGE = 6;
 
-
 export default function EventsPage() {
   const { data: events = [], isLoading, isError } = useEventsData();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [petsAllowedOnly, setPetsAllowedOnly] = useState(false);
 
-  // 🔍 Filter events by search + pets allowed
   const filtered = events.filter(
     (e: Event) =>
       e.title.toLowerCase().includes(search.toLowerCase()) &&
@@ -22,7 +20,6 @@ export default function EventsPage() {
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
 
-  // ✂️ Slice results for pagination
   const paginated = filtered.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
@@ -33,7 +30,6 @@ export default function EventsPage() {
 
   return (
     <div className="space-y-4">
-      {/* 🔎 Search + Filter Section */}
       <div className="flex items-center gap-3">
         <SearchBar
           value={search}
@@ -51,14 +47,12 @@ export default function EventsPage() {
         </label>
       </div>
 
-      {/* 🎟️ Event Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {paginated.map((event: Event) => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>
 
-      {/* 📄 Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex justify-center gap-3 mt-6">
           <button
