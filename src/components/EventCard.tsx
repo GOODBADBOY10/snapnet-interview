@@ -21,7 +21,7 @@ export default function EventCard({ event }: EventCardProps) {
       <h3 className="text-lg font-semibold">{event.title}</h3>
       <p className="text-gray-500">{event.date}</p>
       {event.petsAllowed && (
-        <p className="text-green-600 mt-1">🐾 Pets Allowed</p>
+        <p className="text-green-600 mt-1">Pets Allowed</p>
       )}
     </Link>
   );
